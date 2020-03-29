@@ -3,7 +3,14 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
+    @books = Book.where(book_search_params)
+
+    render json: @books
+  end
+  
+  # GET /books/isbn/1
+  def show_by_isbn
+    @books = Book.find()
 
     render json: @books
   end
@@ -47,5 +54,9 @@ class BooksController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def book_params
       params.require(:book).permit(:title, :isbn, :price, :short_description, :author)
+    end
+    
+    def book_search_params
+      params.permit(:title, :id)
     end
 end
