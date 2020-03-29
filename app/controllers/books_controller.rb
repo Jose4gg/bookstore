@@ -3,14 +3,22 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.where(book_search_params)
+    params = book_search_params
+    params[:id] = params[:ids].split(',') if params[:ids].present?
+    params = params.except(:ids)
+
+    if params[:title].present?
+      @books = Book.search_by_title(params[:title])
+    else 
+      @books = Book.where(params)
+    end
 
     render json: @books
   end
   
   # GET /books/isbn/1
-  def show_by_isbn
-    @books = Book.find()
+  def find_by_isbn
+    @books = Book.find_by_isbn(params[:isbn])
 
     render json: @books
   end
@@ -57,6 +65,6 @@ class BooksController < ApplicationController
     end
     
     def book_search_params
-      params.permit(:title, :id)
+      params.permit(:title, :ids)
     end
 end

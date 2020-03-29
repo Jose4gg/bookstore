@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :books do
-      get 'books/isbn/:isbn', to: 'books#show_by_isbn'
+  resources :books do
+    collection do 
+      get 'isbn/:isbn', to: 'books#find_by_isbn'
     end
-    resources :authors
   end
+  resources :authors
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
