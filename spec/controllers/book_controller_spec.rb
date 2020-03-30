@@ -66,6 +66,27 @@ RSpec.describe BooksController, type: :controller do
       expect(response).to_not be_successful
     end
   end
+ 
+  describe "POST /books" do
+    it "returns succesful" do 
+      post :create, params: { book: { title: "Hope II", short_description: "Example", price: 30, author_id: @author.id, isbn: "9780008151621" }}
+      expect(response).to be_successful
+    end
+    
+    it "fails" do 
+      post :create, params: { book: {  short_description: "Example", price: 30, author_id: @author.id, isbn: "9780008151621" }}
+      expect(response).to_not be_successful
+    end
+  end
+
+  describe "DELETE /books/1" do
+    it "destroy succesful" do 
+      id = @book1.id
+
+      delete :destroy, params: { id: id }
+      expect(Book.find_by_id(id)).to be(nil)
+    end
+  end
 
 
 end
