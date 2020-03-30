@@ -10,12 +10,12 @@ RSpec.describe Book, type: :model do
   end
 
   it 'price should be present' do 
-    puts subject.price = nil
+    subject.price = nil
     expect(subject).to_not be_valid
   end
 
   it 'short_description should be present' do 
-    puts subject.short_description = nil
+    subject.short_description = nil
     expect(subject).to_not be_valid
   end
   
