@@ -16,6 +16,11 @@ gem 'puma', '~> 4.1'
 
 gem 'pg_search', '~> 2.3', '>= 2.3.2'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'rack-attack'
+gem 'redis-rails'
+gem 'redis'
+
+
 
 
 gem 'isbn_validation', '~> 1.2', '>= 1.2.2'
